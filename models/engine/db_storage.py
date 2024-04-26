@@ -84,7 +84,7 @@ class DBStorage:
         for i in my_cls.values():
             if (i.id == id):
                 return i
-        reurn None
+        return None
 
     def count(self, cls=None):
         """Returns number of matching object in a given class"""
