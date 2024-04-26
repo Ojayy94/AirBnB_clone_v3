@@ -17,7 +17,7 @@ def states():
 
 
 @app_views.route('/states/<state_id>', methods=['GET'], strict_slashes=False)
-    def get_state(state_id):
+def get_state(state_id):
     """Retrieves a State object"""
     states = storage.get(State, state_id)
     if not states:
@@ -26,7 +26,7 @@ def states():
 
 
 @app_views.route('/states/<state_id>', methods=['DELETE'], strict_slashes=False)
-    def del_state(state_id):
+def del_state(state_id):
     """Deletes a State"""
     states = storage.get(State, state_id)
     if not states:
@@ -39,12 +39,12 @@ def states():
 
 
 @app_views.route('/states', methods=['POST'], strict_slashes=False)
-    def create_state():
+def create_state():
     """Creates a state"""
-    if not request.get_json()
+    if not request.get_json():
         abort(400, description='Not a JSON')
 
-    if "name" not in request.get_json()
+    if "name" not in request.get_json():
         abort(400, description='Missing name')
 
     input_data = request.get_json()
@@ -54,14 +54,14 @@ def states():
 
 
 @app_views.route('/states/<state_id>', methods=['PUT'], strict_slashes=False)
-    def update_state():
+def update_state():
     """update a state"""
 
     state = storage.get(State, state_id)
 
     if not state:
         abort(404)
-    if not request.get_json()
+    if not request.get_json():
         abort(400, description='Not a JSON')
 
     ignore_keys = ['id', 'created_at', 'updated_at']

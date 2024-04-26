@@ -4,6 +4,7 @@
 from models import storage
 from api.v1.views import app_views
 from flask import Flask, abort, jsonify
+from flask import make_response, render_template
 from os import getenv
 
 app = Flask(__name__)
@@ -16,7 +17,12 @@ def db_close(self):
     storage.close()
 
 
-if __name__ == "__main__":
+@app.errorhandler(404)
+def not_found(e):
+  return render_template(jsonify({"error": "Not found"}), 404)
+
+
+if __name__ == '__main__':
     """calls the function"""
     app.run(host=getenv("HBNB_API_HOST", "0.0.0.0"),
             port=int(getenv("HBNB_API_PORT", "5000")), threaded=True)
