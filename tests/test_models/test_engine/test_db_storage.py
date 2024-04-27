@@ -86,3 +86,71 @@ class TestFileStorage(unittest.TestCase):
     @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_save(self):
         """Test that save properly saves objects to file.json"""
+
+
+class TestDBStorage(unittest.TestCase):
+    """Test cases for the DBStorage class"""
+
+    @classmethod
+    def setUpClass(cls):
+        """Set up for the test class"""
+        # Initialize DBStorage instance
+        models.storage = DBStorage()
+
+    def test_get_existing_object(self):
+        """Test retrieving an existing object by ID"""
+        # Create a State object and save it to the database
+        state = State(name="California")
+        state.save()
+        # Retrieve the State object by ID using the get method
+        retrieved_state = models.storage.get(State, state.id)
+        # Assert that the retrieved object matches the original object
+        self.assertEqual(retrieved_state.id, state.id)
+        self.assertEqual(retrieved_state.name, state.name)
+
+    def test_get_non_existing_object(self):
+        """Test retrieving a non-existing object by ID"""
+        # Attempt to retrieve an object with an invalid ID
+        retrieved_state = models.storage.get(State, "invalid_id")
+        # Assert that the retrieved object is None
+        self.assertIsNone(retrieved_state)
+
+    def test_get_invalid_input_types(self):
+        """Test retrieving an object with invalid input types"""
+        # Attempt to retrieve an object with invalid input types
+        with self.assertRaises(TypeError):
+            models.storage.get(State, None)
+        with self.assertRaises(TypeError):
+            models.storage.get(State, 123)
+
+    def test_count_objects(self):
+        """Test counting objects for a specific class"""
+        # Create multiple State objects and save them to the database
+        State(name="New York").save()
+        State(name="Texas").save()
+        # Count the number of State objects in the database
+        state_count = models.storage.count(State)
+        # Assert that the count matches the number of State objects created
+        self.assertEqual(state_count, 2)
+
+    def test_count_no_objects(self):
+        """Test counting objects when there are no objects present"""
+        # Count the number of State objects in the empty database
+        state_count = models.storage.count(State)
+        # Assert that the count is zero
+        self.assertEqual(state_count, 0)
+
+    def test_count_all_objects(self):
+        """Test counting objects for all classes"""
+        # Count the total number of objects in the database
+        total_count = models.storage.count()
+        # Assert that the count is equal to the sum of counts for all classes
+        self.assertEqual(total_count, 2)  # Assuming 2 State created
+
+    def test_count_invalid_input_types(self):
+        """Test counting objects with invalid class input types"""
+        # Attempt to count objects with invalid class input types
+        with self.assertRaises(TypeError):
+            models.storage.count(None)
+        with self.assertRaises(TypeError):
+            models.storage.count("State")
