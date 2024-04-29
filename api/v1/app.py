@@ -26,4 +26,4 @@ def not_found(e):
 if __name__ == "__main__":
     """calls the function"""
     app.run(host=getenv("HBNB_API_HOST", "0.0.0.0"),
-             port=int(getenv("HBNB_API_PORT", "5000")), threaded=True)
+            port=int(getenv("HBNB_API_PORT", "5000")), threaded=True)
