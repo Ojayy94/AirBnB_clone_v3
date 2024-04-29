@@ -6,7 +6,7 @@ from api.v1.views import app_views
 from flask import Flask, abort, jsonify
 from flask import make_response, render_template
 from os import getenv
-from flask_cors import CORS
+
 
 app = Flask(__name__)
 app.register_blueprint(app_views)
@@ -20,7 +20,7 @@ def db_close(self):
 
 @app.errorhandler(404)
 def not_found(e):
-    return make_response(jsonify({"error": "Not found"}), 404)
+    return render_template(jsonify({"error": "Not found"}), 404)
 
 
 if __name__ == '__main__':
