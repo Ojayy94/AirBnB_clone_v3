@@ -23,7 +23,7 @@ def not_found(e):
     return make_response(jsonify({"error": "Not found"}), 404)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     """calls the function"""
     app.run(host=getenv("HBNB_API_HOST", "0.0.0.0"),
-            port=int(getenv("HBNB_API_PORT", "5000")), threaded=True)
+            port=getenv("HBNB_API_PORT", "5000"), threaded=True)
