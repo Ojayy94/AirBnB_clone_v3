@@ -85,12 +85,12 @@ class FileStorage:
         """Returns number of matching object in a given class"""
         my_class = classes.values()
 
-        if cls:
-            val = len(models.storage.all(i).values())
-
-        else:
+        if not cls:
             val = 0
             for i in my_class:
                 val += len(models.storage.all(i).values())
+
+        else:
+            val = len(models.storage.all(i).values())
 
         return val
