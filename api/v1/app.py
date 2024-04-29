@@ -13,7 +13,7 @@ app.register_blueprint(app_views)
 
 
 @app.teardown_appcontext
-def db_close(e):
+def db_close(self):
     """close"""
     storage.close()
 
