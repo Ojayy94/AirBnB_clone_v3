@@ -94,7 +94,7 @@ class DBStorage:
             val = len(models.storage.all(i).values())
 
         else:
-            val = 0;
+            val = 0
             for i in my_class:
                 val += len(models.storage.all(i).values())
 

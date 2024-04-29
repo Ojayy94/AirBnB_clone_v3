@@ -19,7 +19,7 @@ def db_close(self):
 
 @app.errorhandler(404)
 def not_found(e):
-  return render_template(jsonify({"error": "Not found"}), 404)
+    return render_template(jsonify({"error": "Not found"}), 404)
 
 
 if __name__ == '__main__':
