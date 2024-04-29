@@ -5,7 +5,7 @@ from models import storage
 from api.v1.views import app_views
 from flask import Flask, abort, jsonify
 from flask import make_response, render_template
-from os import getenv
+from os import getenv, environ
 
 
 app = Flask(__name__)
