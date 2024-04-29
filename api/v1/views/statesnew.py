@@ -62,7 +62,7 @@ def update_state():
 
     if not state:
         abort(404)
-    if not request.get_json():
+    if not request.is_json():
         abort(400, description='Not a JSON')
 
     ignore_keys = ['id', 'created_at', 'updated_at']
