@@ -68,7 +68,7 @@ def update_state():
     ignore_keys = ['id', 'created_at', 'updated_at']
 
     input_data = request.get_json()
-    for k, v in data.items():
+    for k, v in input_data.items():
         if k not in ignore_keys:
             setattr(state, k, v)
     storage.save()
