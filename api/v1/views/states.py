@@ -43,10 +43,10 @@ def del_state(state_id):
 def create_state():
     """Creates a state"""
     if not request.get_json():
-        abort(400, description="Not a JSON")
+        abort(400, description='Not a JSON')
 
     if "name" not in request.get_json():
-        abort(400, description="Missing name")
+        abort(400, description='Missing name')
 
     input_data = request.get_json()
     create = State(**input_data)
@@ -63,7 +63,7 @@ def update_state(state_id):
     if not state:
         abort(404)
     if not request.get_json():
-        abort(400, description="Not a JSON")
+        abort(400, description='Not a JSON')
 
     ignore_keys = ['id', 'created_at', 'updated_at']
 
