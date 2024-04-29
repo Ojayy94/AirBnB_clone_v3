@@ -91,6 +91,6 @@ class FileStorage:
                 val += len(models.storage.all(i).values())
 
         else:
-            val = len(models.storage.all(i).values())
+            val = len(models.storage.all(cls).values())
 
         return val
