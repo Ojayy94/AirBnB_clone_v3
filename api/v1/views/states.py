@@ -11,8 +11,9 @@ def states():
     """"Retrieves the list of all State objects"""
     states = storage.all(State).values()
     states_list = []
-    for i in states:
-        states_list.append(i.to_dict())
+
+    for state in states:
+        states_list.append(state.to_dict())
     return jsonify(states_list)
 
 
@@ -21,6 +22,7 @@ def states():
 def get_state(state_id):
     """Retrieves a State object"""
     states = storage.get(State, state_id)
+
     if not states:
         abort(404)
     return jsonify(states.to_dict())
@@ -31,6 +33,7 @@ def get_state(state_id):
 def del_state(state_id):
     """Deletes a State"""
     states = storage.get(State, state_id)
+
     if not states:
         abort(404)
 
@@ -64,6 +67,7 @@ def update_state(state_id):
 
     if not state:
         abort(404)
+
     if not request.get_json():
         abort(400, description="Not a JSON")
 
